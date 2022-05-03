@@ -1,12 +1,12 @@
 <template>
   <div>
-    <b-conainter>
-      <b-row>
-        <b-col>
-          <px-cards :characters="characters"></px-cards>
-        </b-col>
-      </b-row>
-    </b-conainter>
+    <px-cards id="cards" :characters="characters"></px-cards>
+    <b-pagination
+      v-model="currentPage"
+      :total-rows="rows"
+      :per-page="perPage"
+      aria-controls="cards"
+    ></b-pagination>
   </div>
 </template>
 
@@ -20,6 +20,8 @@ export default {
 
   data() {
     return {
+      currentPage: 1,
+      perPage: 10,
       characters: [],
       locations: [],
       episodes: [],
@@ -27,7 +29,15 @@ export default {
   },
 
   created() {
-    api.getCharacters(1).then((resp) => (this.characters = resp));
+    api
+      .getCharacters(this.currentPage)
+      .then((resp) => (this.characters = resp));
+  },
+
+  computed: {
+    rows() {
+      return this.characters.length;
+    },
   },
 };
 </script>
