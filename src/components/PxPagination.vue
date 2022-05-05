@@ -42,7 +42,6 @@ export default {
       currentPage: 1,
       characters: [],
       lastFetch: 1,
-      apiPage: 1,
     };
   },
 
@@ -58,14 +57,13 @@ export default {
 
   watch: {
     currentPage() {
-      this.apiPage = (this.currentPage + 1) / 2;
       if (this.currentPage % 2 != 0) {
         this.lastFetch = this.currentPage;
         this.getCharacters(this.apiPage);
       } else {
         if (this.currentPage < this.lastFetch) {
           this.getCharacters(this.currentPage - 1);
-          this.lastFetch = this.currentPage;
+          this.lastFetch = this.currentPage - 1;
         }
       }
     },
@@ -79,6 +77,10 @@ export default {
       } else {
         return this.characters.slice(-10);
       }
+    },
+
+    apiPage() {
+      return (this.currentPage + 1) / 2;
     },
   },
 };
