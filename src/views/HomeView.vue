@@ -1,43 +1,21 @@
 <template>
   <div>
-    <px-cards id="cards" :characters="characters"></px-cards>
-    <b-pagination
-      v-model="currentPage"
-      :total-rows="rows"
-      :per-page="perPage"
-      aria-controls="cards"
-    ></b-pagination>
+    <px-pagination></px-pagination>
   </div>
 </template>
 
 <script>
-import PxCards from "@/components/PxCards";
-import api from "@/api";
+import PxPagination from "@/components/PxPagination";
 
 export default {
   name: "HomeView",
-  components: { PxCards },
+  components: { PxPagination },
 
   data() {
     return {
-      currentPage: 1,
       perPage: 10,
-      characters: [],
-      locations: [],
-      episodes: [],
+      isLoading: false,
     };
-  },
-
-  created() {
-    api
-      .getCharacters(this.currentPage)
-      .then((resp) => (this.characters = resp));
-  },
-
-  computed: {
-    rows() {
-      return this.characters.length;
-    },
   },
 };
 </script>

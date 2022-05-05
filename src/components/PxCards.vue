@@ -1,14 +1,26 @@
 <template>
   <div>
     <b-container>
-      <b-row class="mt-md-3">
-        <b-col md="3" v-for="ch in characters" :key="ch.id">
+      <b-row class="m-md-2 p-md-5 justify-between">
+        <b-col md="6" v-for="ch in charactersList" :key="ch.id">
           <b-card
+            header-tag="header"
             :title="ch.name"
             :img-src="ch.image"
             img-top
             class="mb-md-3"
-          ></b-card>
+          >
+            <template #header>
+              <div
+                :class="{
+                  'bg-success': ch.status === 'Alive',
+                  'bg-danger': ch.status === 'Dead',
+                  'bg-secondary': ch.status === 'uknown',
+                }"
+                class="rounded-circle"
+              ></div>
+            </template>
+          </b-card>
         </b-col>
       </b-row>
     </b-container>
@@ -20,7 +32,7 @@ export default {
   name: "PxCards",
 
   props: {
-    characters: {
+    charactersList: {
       type: Array,
       default: () => [],
     },
