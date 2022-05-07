@@ -6,7 +6,8 @@
       :per-page="perPage"
       align="center"
     ></b-pagination>
-    <px-cards :charactersList="charactersList"></px-cards>
+    <b-spinner type="grow" label="Spinning" v-if="isLoading"></b-spinner>
+    <px-cards :charactersList="charactersList" v-else></px-cards>
     <b-pagination
       v-model="currentPage"
       :total-rows="rows"
@@ -28,59 +29,57 @@ export default {
   props: {
     perPage: {
       type: Number,
-      default: 5,
+      default: 10,
     },
-    isLoading: {
-      type: Boolean,
-      default: true,
-    },
+    // isLoading: {
+    //   type: Boolean,
+    //   default: false,
+    // },
   },
 
   data() {
     return {
-      rows: 25,
       currentPage: 1,
       characters: [],
       lastFetch: 1,
+      isLoading: true,
     };
   },
 
   created() {
-    this.getCharacters(1);
+    this.isLoading = true;
+    this.getCharacters(1).finally(() => (this.isLoading = false));
   },
 
   methods: {
     getCharacters(page) {
-      return api.getCharacters(page).then((resp) => (this.characters = resp));
+      this.isLoading = true;
+      return api
+        .getCharacters(page)
+        .then((resp) => (this.characters = this.characters.concat(resp)))
+        .finally(() => (this.isLoading = false));
     },
   },
 
   watch: {
     currentPage() {
-      if (this.currentPage % 2 != 0) {
+      if (this.currentPage % 2 == 0 && this.currentPage > this.lastFetch) {
+        this.getCharacters(this.currentPage);
         this.lastFetch = this.currentPage;
-        this.getCharacters(this.apiPage);
-      } else {
-        if (this.currentPage < this.lastFetch) {
-          this.getCharacters(this.currentPage - 1);
-          this.lastFetch = this.currentPage - 1;
-        }
       }
     },
   },
 
   computed: {
     charactersList() {
-      let part = this.currentPage % 2 != 0 ? true : false;
-      if (part) {
-        return this.characters.slice(0, 10);
-      } else {
-        return this.characters.slice(-10);
-      }
+      return this.characters.slice(
+        (this.currentPage - 1) * this.perPage,
+        this.currentPage * this.perPage
+      );
     },
 
-    apiPage() {
-      return (this.currentPage + 1) / 2;
+    rows() {
+      return this.characters.length;
     },
   },
 };

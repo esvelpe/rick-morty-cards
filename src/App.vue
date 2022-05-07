@@ -1,15 +1,15 @@
 <template>
   <div>
-    <home-view></home-view>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HomeView from "@/views/HomeView";
+//import HomeView from "@/views/HomeView";
 
 export default {
   name: "App",
-  components: { HomeView },
+  components: {},
 };
 </script>
 

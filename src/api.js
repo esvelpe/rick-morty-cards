@@ -21,9 +21,7 @@ function getEpisodes(page) {
 }
 
 function getCharacter(id) {
-  return fetch(`${urlCharacter}/${id}`)
-    .then((resp) => resp.json())
-    .then((resp) => resp.results);
+  return fetch(`${urlCharacter}/${id}`).then((resp) => resp.json());
 }
 
 function getLocation(id) {

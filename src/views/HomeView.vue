@@ -14,7 +14,6 @@ export default {
   data() {
     return {
       perPage: 10,
-      isLoading: false,
     };
   },
 };
