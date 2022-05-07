@@ -10,6 +10,7 @@
         >
           <router-link
             :to="{ name: 'character-detail', params: { id: ch.id } }"
+            class="isActive"
           >
             <b-card
               header-tag="header"
@@ -20,22 +21,21 @@
             >
               <b-card-text class="p-0">
                 <div class="d-flex row">
-                  <b-col md="7">
-                    <strong>{{ ch.name }}</strong>
+                  <b-col md="9">
+                    <strong class="pl-3">{{ ch.name }}</strong>
                   </b-col>
-                  <b-col md="2" id="status_circle_col">
-                    <div
-                      id="status_circle"
-                      class="d-flex rounded-circle"
-                      :class="{
-                        alive: ch.status === 'Alive',
-                        dead: ch.status === 'Dead',
-                        unknown: ch.status === 'unknown',
-                      }"
-                    ></div>
-                  </b-col>
-                  <b-col>
-                    <span md="3">alive</span>
+                  <b-col
+                    md="3"
+                    class="rounded-pill text-dark"
+                    :class="{
+                      'bg-success': ch.status === 'Alive',
+                      'bg-danger': ch.status === 'Dead',
+                      'bg-secondary': ch.status === 'unknown',
+                    }"
+                  >
+                    <span class="d-flex justify-content-center">{{
+                      ch.status
+                    }}</span>
                   </b-col>
                 </div>
               </b-card-text>
@@ -60,6 +60,10 @@ export default {
 };
 </script>
 <style scoped>
+.isActive {
+  color: black;
+  text-decoration: none;
+}
 #status_circle {
   height: 100%;
   padding: 0 -10px;

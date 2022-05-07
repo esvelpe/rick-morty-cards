@@ -1,6 +1,7 @@
 <template>
   <div>
-    <b-container>
+    <b-spinner v-if="isLoading" type="grow" label="Spinning"></b-spinner>
+    <b-container v-else>
       <b-row class="mt-5">
         <b-col md="6">
           <div class="mt-3">
@@ -19,6 +20,31 @@
           <b-col md="12">{{ character.species }}</b-col>
           <b-col md="12"> {{ character.gender }} </b-col>
         </b-row>
+      </b-row>
+      <b-row>
+        <b-col>
+          <strong class="d-flex justify-content-center"
+            >Locación actual:</strong
+          >
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col><strong>Nombre: </strong></b-col>
+        <b-col>
+          {{ location.name }}
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col><strong>Tipo: </strong></b-col>
+        <b-col>
+          {{ location.type }}
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col><strong>Dimensión: </strong></b-col>
+        <b-col>
+          {{ location.dimension }}
+        </b-col>
       </b-row>
     </b-container>
   </div>
@@ -48,7 +74,7 @@ export default {
     this.getCharacter();
   },
 
-  mounted() {
+  beforeUpdate() {
     this.getLocation();
   },
 
@@ -64,9 +90,9 @@ export default {
     },
     getLocation() {
       this.isLoading = true;
-      const location_id = this.character.location.url.slice(-1);
+      const location_url = this.character.location.url;
       api
-        .getLocation(location_id)
+        .getLocation(location_url)
         .then((resp) => (this.location = resp))
         .finally((this.isLoading = false));
     },

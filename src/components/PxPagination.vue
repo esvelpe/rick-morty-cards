@@ -1,6 +1,7 @@
 <template>
   <div>
     <b-pagination
+      class="mt-3"
       v-model="currentPage"
       :total-rows="rows"
       :per-page="perPage"

@@ -25,9 +25,7 @@ function getCharacter(id) {
 }
 
 function getLocation(id) {
-  return fetch(`${urlLocation}/${id}`)
-    .then((resp) => resp.json())
-    .then((resp) => resp.results);
+  return fetch(`${id}`).then((resp) => resp.json());
 }
 
 function getEpisode(id) {
