@@ -1,74 +1,26 @@
 <template>
-  <div class="contenedor">
-    <b-spinner
-      v-if="isLoading"
-      type="grow"
-      label="Spinning"
-      style="width: 3rem; height: 3rem"
-    ></b-spinner>
-    <b-container v-else>
-      <b-row>
-        <b-col>
-          <h1 class="d-flex justify-content-center">
-            INFORMACIÓN DEL PERSONAJE
-          </h1>
-        </b-col>
-      </b-row>
-      <b-row class="mt-5">
-        <b-col md="2">
-          <img
-            :src="character.image"
-            alt="imagen del personaje"
-            id="img-border"
-            :class="{
-              'border-success': character.status === 'Alive',
-              'border-danger': character.status === 'Dead',
-              'border-secondary': character.status === 'unknown',
-            }"
-          />
-        </b-col>
-        <b-row class="d-flex align-items-center">
-          <b-row>
-            <b-col><h3>Nombre del personaje:</h3></b-col>
-            <b-col>{{ character.name }}</b-col>
-          </b-row>
-          <b-row>
-            <b-col><h3>Especie del personaje:</h3></b-col>
-            <b-col>{{ character.species }}</b-col>
-          </b-row>
-          <b-row>
-            <b-col><h3>Género del personaje:</h3></b-col>
-            <b-col> {{ character.gender }} </b-col>
-          </b-row>
-        </b-row>
-      </b-row>
-      <b-row class="h-50">
-        <b-col class="h-100">
-          <strong class="d-flex justify-content-center"
-            >Locación actual:</strong
-          >
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col><strong>Nombre: </strong></b-col>
-        <b-col>
-          {{ location.name }}
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col><strong>Tipo: </strong></b-col>
-        <b-col>
-          {{ location.type }}
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col><strong>Dimensión: </strong></b-col>
-        <b-col>
-          {{ location.dimension }}
-        </b-col>
-      </b-row>
-    </b-container>
-  </div>
+  <b-container style="text-align: center">
+    <b-row>
+      <b-col>
+        <h1 class="d-flex justify-content-center mt-5 mb-5">
+          INFORMACIÓN DEL PERSONAJE
+        </h1>
+      </b-col>
+    </b-row>
+    <b-row class="info-character">
+      <b-col md="4" class="col-img">
+        <img :src="character.image" alt="Imagen del personaje" />
+      </b-col>
+      <b-col md="8">
+        <strong class="d-block">Nombre del personaje</strong>
+        <span class="d-block mb-3"> {{ character.name }} </span>
+        <strong class="d-block">Especie del personaje:</strong>
+        <span class="d-block mb-3"> {{ character.species }} </span>
+        <strong class="d-block">Género del personaje:</strong>
+        <span class="d-block"> {{ character.gender }} </span>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 <script>
 import api from "@/api.js";
@@ -141,6 +93,14 @@ export default {
 </script>
 <style scoped>
 .contenedor {
+  font-size: 1.5rem;
+}
+.col-img {
+  margin-left: 15%;
+  margin-right: -15%;
+}
+
+.info-character {
   font-size: 1.5rem;
 }
 
