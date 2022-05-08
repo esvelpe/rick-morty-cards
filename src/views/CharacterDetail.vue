@@ -1,28 +1,49 @@
 <template>
-  <div>
-    <b-spinner v-if="isLoading" type="grow" label="Spinning"></b-spinner>
+  <div class="contenedor">
+    <b-spinner
+      v-if="isLoading"
+      type="grow"
+      label="Spinning"
+      style="width: 3rem; height: 3rem"
+    ></b-spinner>
     <b-container v-else>
-      <b-row class="mt-5">
-        <b-col md="6">
-          <div class="mt-3">
-            <img :src="character.image" alt="imagen del personaje" />
-          </div>
-        </b-col>
-        <b-row class="d-flex align-items-center">
-          <b-col md="8">{{ character.name }}</b-col>
-          <b-col md="4"
-            ><span
-              ><b-badge pill :variant="variantColor">{{
-                character.status
-              }}</b-badge></span
-            ></b-col
-          >
-          <b-col md="12">{{ character.species }}</b-col>
-          <b-col md="12"> {{ character.gender }} </b-col>
-        </b-row>
-      </b-row>
       <b-row>
         <b-col>
+          <h1 class="d-flex justify-content-center">
+            INFORMACIÓN DEL PERSONAJE
+          </h1>
+        </b-col>
+      </b-row>
+      <b-row class="mt-5">
+        <b-col md="2">
+          <img
+            :src="character.image"
+            alt="imagen del personaje"
+            id="img-border"
+            :class="{
+              'border-success': character.status === 'Alive',
+              'border-danger': character.status === 'Dead',
+              'border-secondary': character.status === 'unknown',
+            }"
+          />
+        </b-col>
+        <b-row class="d-flex align-items-center">
+          <b-row>
+            <b-col><h3>Nombre del personaje:</h3></b-col>
+            <b-col>{{ character.name }}</b-col>
+          </b-row>
+          <b-row>
+            <b-col><h3>Especie del personaje:</h3></b-col>
+            <b-col>{{ character.species }}</b-col>
+          </b-row>
+          <b-row>
+            <b-col><h3>Género del personaje:</h3></b-col>
+            <b-col> {{ character.gender }} </b-col>
+          </b-row>
+        </b-row>
+      </b-row>
+      <b-row class="h-50">
+        <b-col class="h-100">
           <strong class="d-flex justify-content-center"
             >Locación actual:</strong
           >
@@ -61,6 +82,7 @@ export default {
       character: [],
       location: [],
       isLoading: false,
+      variant: "success",
     };
   },
 
@@ -117,3 +139,12 @@ export default {
   },
 };
 </script>
+<style scoped>
+.contenedor {
+  font-size: 1.5rem;
+}
+
+#img-border {
+  border: 10px solid;
+}
+</style>

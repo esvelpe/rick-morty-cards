@@ -16,17 +16,17 @@
               header-tag="header"
               :img-src="ch.image"
               img-top
-              style="max-width: 100rem"
+              style="max-width: 100%"
               class="mb-md-3"
             >
               <b-card-text class="p-0">
                 <div class="d-flex row">
                   <b-col md="9">
-                    <strong class="pl-3">{{ ch.name }}</strong>
+                    <strong class="pl-1">{{ ch.name }}</strong>
                   </b-col>
                   <b-col
                     md="3"
-                    class="rounded-pill text-dark"
+                    class="rounded-pill text-dark align-middle"
                     :class="{
                       'bg-success': ch.status === 'Alive',
                       'bg-danger': ch.status === 'Dead',
