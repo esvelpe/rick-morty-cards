@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="body">
     <b-container fluid>
       <div class="d-flex row">
         <b-col
@@ -16,10 +16,10 @@
               header-tag="header"
               :img-src="ch.image"
               img-top
-              style="max-width: 100%"
-              class="mb-md-3"
+              style="max-width: 120%"
+              class="card mb-md-3"
             >
-              <b-card-text class="p-0">
+              <b-card-text class="p-0 card-text">
                 <div class="d-flex row">
                   <b-col md="9">
                     <strong class="pl-1">{{ ch.name }}</strong>
@@ -60,6 +60,14 @@ export default {
 };
 </script>
 <style scoped>
+html,
+body {
+  background-color: black;
+}
+.body {
+  background-color: black;
+}
+
 .isActive {
   color: black;
   text-decoration: none;
@@ -71,13 +79,14 @@ export default {
 #status_circle_col {
   padding: 0 15px 0 10px;
 }
-.alive {
-  background-color: rgb(83, 142, 83);
+
+.card-text {
+  color: white;
 }
-.dead {
-  background-color: brown;
-}
-.unknown {
-  background-color: gray;
+
+.card {
+  width: 120%;
+  border: 1.5px solid white;
+  background-color: rgb(0, 0, 0);
 }
 </style>

@@ -13,4 +13,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+html,
+body {
+  font-family: "Macondo", cursive !important;
+}
+</style>

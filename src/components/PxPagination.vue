@@ -14,6 +14,7 @@
       :total-rows="rows"
       :per-page="perPage"
       align="center"
+      class="mt-3"
     ></b-pagination>
   </div>
 </template>
@@ -32,10 +33,6 @@ export default {
       type: Number,
       default: 10,
     },
-    // isLoading: {
-    //   type: Boolean,
-    //   default: false,
-    // },
   },
 
   data() {
